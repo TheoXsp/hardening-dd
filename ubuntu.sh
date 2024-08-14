@@ -154,7 +154,6 @@ function main {
   f_package_install
   f_psad
   f_coredump
-  f_usbguard
   f_postfix
   f_apport
   f_motdnews

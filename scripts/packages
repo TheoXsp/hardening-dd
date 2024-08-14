@@ -31,7 +31,22 @@ function f_package_install {
 
   local PACKAGE_INSTALL
 
-  PACKAGE_INSTALL="acct aide-common cracklib-runtime debsums gnupg2 haveged libpam-pwquality libpam-tmpdir needrestart openssh-server postfix psad rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock $APPARMOR $AUDITD $VM"
+  # Add Docker's official GPG key:
+  sudo apt-get update
+  sudo apt-get install ca-certificates curl
+  sudo install -m 0755 -d /etc/apt/keyrings
+  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+  # Add the repository to Apt sources:
+  echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get update
+
+  PACKAGE_INSTALL="acct aide-common cracklib-runtime debsums gnupg2 haveged libpam-pwquality libpam-tmpdir needrestart openssh-server postfix psad rkhunter sysstat systemd-coredump tcpd update-notifier-common vlock docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin $APPARMOR $AUDITD $VM"
+
 
   for deb_install in $PACKAGE_INSTALL; do
     $APT install --no-install-recommends "$deb_install"
@@ -49,7 +64,7 @@ function f_package_remove {
   echo "[$SCRIPT_COUNT] Package removal"
 
   local PACKAGE_REMOVE
-  PACKAGE_REMOVE="apport* autofs avahi* beep git pastebinit popularity-contest rsh* rsync talk* telnet* tftp* whoopsie xinetd yp-tools ypbind"
+  PACKAGE_REMOVE="apport* autofs avahi* beep pastebinit popularity-contest rsh* rsync talk* telnet* tftp* whoopsie xinetd yp-tools ypbind"
 
   for deb_remove in $PACKAGE_REMOVE; do
     $APT purge "$deb_remove"

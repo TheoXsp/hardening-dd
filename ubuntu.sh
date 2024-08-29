@@ -129,9 +129,9 @@ function main {
   done
 
   f_pre
-  f_kernel
+  # f_kernel
   f_firewall
-  f_disablenet
+  # f_disablenet
   f_disablefs
   f_disablemod
   f_systemdconf
@@ -148,7 +148,7 @@ function main {
   f_sudo
   f_logindefs
   f_sysctl
-  f_limitsconf
+  # f_limitsconf
   f_adduser
   f_rootaccess
   f_package_install

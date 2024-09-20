@@ -144,10 +144,10 @@ function main {
   f_aptget_configure
   f_aptget
   f_hosts
-  f_issue
+  # f_issue
   f_sudo
   f_logindefs
-  f_sysctl
+  # f_sysctl
   # f_limitsconf
   f_adduser
   f_rootaccess
@@ -158,8 +158,8 @@ function main {
   f_apport
   f_motdnews
   f_rkhunter
-  f_sshconfig
-  f_sshdconfig
+  # f_sshconfig
+  # f_sshdconfig
   f_password
   f_cron
   f_ctrlaltdel
@@ -173,7 +173,7 @@ function main {
   f_restrictcompilers
   f_umask
   f_path
-  f_aa_enforce
+  # f_aa_enforce
   f_aide_post
   f_aide_timer
   f_aptget_noexec
